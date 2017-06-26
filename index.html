@@ -1,0 +1,95 @@
+<body>
+  <script type='text/javascript' src='./JavaScriptSpellCheck/include.js' ></script>
+
+<h1>Word Cookie Solver</h1>
+<p>Made by a11ce when she should have been sleeping.<p>
+
+
+  Letters: <input type="text" name="letters" id="in"><br>
+  <button onclick="solve(document.getElementById('in').value)">Solve</button>
+
+
+  <p id="prog"></p>
+
+
+<p id="result"></p>
+
+<script>
+function solve (inp)
+{
+
+  var perArr = permut(inp);
+
+  var fullArr = [];
+  var finalArr =[];
+
+for(var j =0;j<perArr.length;j++)
+{
+fullArr.push(getAllSubstrings(perArr[j]));
+//document.getElementById("result").innerHTML +=perArr[j];
+
+}
+
+  for(var i=0;i<fullArr.length;i++)
+  {
+    for(var k=0;k<fullArr[0].length;k++)
+    {
+if(fullArr[i][k].length>2){
+finalArr.push(fullArr[i][k]);
+}
+//  document.getElementById("result").innerHTML += $Spelling.BinSpellCheck( inp);
+//   document.getElementById("result").innerHTML += fullArr[i][k];
+//
+ console.log(fullArr[i][k]);
+//
+//   document.getElementById("result").innerHTML += " ";
+}
+}
+
+for(var l=0;l<finalArr.length;l++)
+{
+  if($Spelling.BinSpellCheck(finalArr[l]))
+  {
+//  document.getElementById("result").innerHTML+=  $Spelling.BinSpellCheck(finalArr[l])
+    document.getElementById("result").innerHTML += finalArr[l];
+    document.getElementById("result").innerHTML += " ";
+  }
+}
+}
+
+function getAllSubstrings(str) {
+  var i, j, result = [];
+
+  for (i = 0; i < str.length; i++) {
+      for (j = i + 1; j < str.length + 1; j++) {
+          result.push(str.slice(i, j));
+      }
+  }
+  return result;
+}
+
+function permut(string) {
+    if (string.length < 2) return string; // This is our break condition
+
+    var permutations = []; // This array will hold our permutations
+
+    for (var i=0; i<string.length; i++) {
+        var char = string[i];
+
+        // Cause we don't want any duplicates:
+        if (string.indexOf(char) != i) // if char was used already
+            continue;           // skip it this time
+
+        var remainingString = string.slice(0,i) + string.slice(i+1,string.length); //Note: you can concat Strings via '+' in JS
+
+        for (var subPermutation of permut(remainingString))
+            permutations.push(char + subPermutation)
+
+    }
+    return permutations;
+}
+//  document.getElementById("result").innerHTML += inp;
+//  document.getElementById("result").innerHTML += "&#10;&#13;";
+
+</script>
+</body>
