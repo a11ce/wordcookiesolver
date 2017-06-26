@@ -17,13 +17,12 @@
 <script>
 function solve (inp)
 {
-document.getElementById("result").innerHTML ="";
-  
+
   var perArr = permut(inp);
 
   var fullArr = [];
   var finalArr =[];
-
+  var clearedArr =[];
 for(var j =0;j<perArr.length;j++)
 {
 fullArr.push(getAllSubstrings(perArr[j]));
@@ -46,13 +45,16 @@ finalArr.push(fullArr[i][k]);
 //   document.getElementById("result").innerHTML += " ";
 }
 }
-
-for(var l=0;l<finalArr.length;l++)
+var unArr = [];
+$.each(finalArr, function(i, el){
+    if($.inArray(el, unArr) === -1) unArr.push(el);
+});
+for(var l=0;l<unArr.length;l++)
 {
-  if($Spelling.BinSpellCheck(finalArr[l]))
+  if($Spelling.BinSpellCheck(unArr[l]))
   {
 //  document.getElementById("result").innerHTML+=  $Spelling.BinSpellCheck(finalArr[l])
-    document.getElementById("result").innerHTML += finalArr[l];
+    document.getElementById("result").innerHTML += unArr[l];
     document.getElementById("result").innerHTML += " ";
   }
 }
