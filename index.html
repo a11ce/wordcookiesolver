@@ -22,7 +22,6 @@ function solve (inp)
 
   var fullArr = [];
   var finalArr =[];
-  var clearedArr =[];
 for(var j =0;j<perArr.length;j++)
 {
 fullArr.push(getAllSubstrings(perArr[j]));
@@ -40,26 +39,39 @@ finalArr.push(fullArr[i][k]);
 //  document.getElementById("result").innerHTML += $Spelling.BinSpellCheck( inp);
 //   document.getElementById("result").innerHTML += fullArr[i][k];
 //
- console.log(fullArr[i][k]);
+// console.log(fullArr[i][k]);
 //
 //   document.getElementById("result").innerHTML += " ";
 }
 }
-var unArr = [];
-$.each(finalArr, function(i, el){
-    if($.inArray(el, unArr) === -1) unArr.push(el);
-});
-for(var l=0;l<unArr.length;l++)
+
+finalArr = uniq_fast(finalArr);
+
+for(var l=0;l<finalArr.length;l++)
 {
-  if($Spelling.BinSpellCheck(unArr[l]))
+  if($Spelling.BinSpellCheck(finalArr[l]))
   {
 //  document.getElementById("result").innerHTML+=  $Spelling.BinSpellCheck(finalArr[l])
-    document.getElementById("result").innerHTML += unArr[l];
+    document.getElementById("result").innerHTML += finalArr[l];
     document.getElementById("result").innerHTML += " ";
+    console.log(finalArr[l]);
   }
 }
 }
-
+function uniq_fast(a) {
+    var seen = {};
+    var out = [];
+    var len = a.length;
+    var j = 0;
+    for(var i = 0; i < len; i++) {
+         var item = a[i];
+         if(seen[item] !== 1) {
+               seen[item] = 1;
+               out[j++] = item;
+         }
+    }
+    return out;
+}
 function getAllSubstrings(str) {
   var i, j, result = [];
 
